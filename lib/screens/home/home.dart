@@ -25,7 +25,7 @@ class _Home_ScreenState extends State<Home_Screen> {
         ),
         backgroundColor: Colors.black,
       ),
-      backgroundColor: backgroundColors,
+      // backgroundColor: backgroundColors,
       floatingActionButton: Visibility(
         visible: show,
         child: FloatingActionButton(

@@ -1,8 +1,10 @@
 import 'package:firebase_007/components/custom_button.dart';
+import 'package:firebase_007/components/theme_provider.dart';
 import 'package:firebase_007/core/authentication_service.dart';
 import 'package:firebase_007/screens/login.dart';
 import 'package:firebase_007/utils/loader.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MoreScreen extends StatefulWidget {
   const MoreScreen({super.key});
@@ -15,8 +17,20 @@ class _MoreScreenState extends State<MoreScreen> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          const SizedBox(width: 10),
+          const Text('Go Dark'),
+          Switch(
+            value: themeProvider.themeMode == ThemeMode.dark,
+            onChanged: (_) {
+              themeProvider.toggleTheme();
+            },
+          ),
+        ],
         title: const Text(
           'More',
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),

@@ -17,27 +17,31 @@ class Stream_note extends StatelessWidget {
 
         final noteslist = Firestore_Datasource().getNotes(snapshot);
 
-        if (noteslist.isEmpty) {
-          return const Center(
-            child: Text("No notes available"),
-          );
-        }
-
         return Flexible(
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: noteslist.length,
-            itemBuilder: (context, index) {
-              final note = noteslist[index];
-              return Dismissible(
-                key: UniqueKey(),
-                onDismissed: (direction) {
-                  Firestore_Datasource().delete_note(note.id);
-                },
-                child: Task_Widget(note),
-              );
-            },
-          ),
+          child: noteslist.isEmpty
+              ? const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Center(
+                      child: Text("No notes available"),
+                    ),
+                  ],
+                )
+              : ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: noteslist.length,
+                  itemBuilder: (context, index) {
+                    final note = noteslist[index];
+                    return Dismissible(
+                      key: UniqueKey(),
+                      onDismissed: (direction) {
+                        Firestore_Datasource().delete_note(note.id);
+                      },
+                      child: Task_Widget(note),
+                    );
+                  },
+                ),
         );
       },
     );
