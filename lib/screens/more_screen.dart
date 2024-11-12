@@ -15,8 +15,15 @@ class _MoreScreenState extends State<MoreScreen> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return SafeArea(
-      child: SizedBox(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'More',
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+        ),
+        backgroundColor: Colors.black,
+      ),
+      body: SizedBox(
         height: size.height,
         width: size.width,
         child: Column(
